@@ -1,25 +1,24 @@
-import logo from './logo.svg';
 import './App.css';
+import useTimeOut from './hooks/useTimeOut';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [count, incrementFlag, resetFlag, increment, pauseCount, resetCount] =
+		useTimeOut();
+	return (
+		<div>
+			{count}
+			<br />
+			<button
+				onClick={(e) => {
+					!incrementFlag ? increment(e) : pauseCount(e);
+				}}
+			>
+				{!incrementFlag ? 'start' : 'pause'}
+			</button>
+			<br />
+			{resetFlag && <button onClick={resetCount}> reset </button>}
+		</div>
+	);
 }
 
 export default App;
